@@ -4,6 +4,8 @@
 		"stdio.h": "c",
 		"errno.h": "c",
 		"features.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"pipex_bonus.h": "c",
+		"unistd.h": "c"
 	}
 }

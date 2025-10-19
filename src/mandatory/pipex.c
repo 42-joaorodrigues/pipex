@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 19:51:19 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/19 00:25:11 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/10/20 01:32:59 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	open_fds(char **av, int fds[2][2])
 
 void	execute_last_cmd(char *cmd, char **envp, int fds[2][2], int *pids)
 {
+	pids[1] = fork();
 	if (pids[1] < 0)
 	{
 		close_fds(fds);
@@ -64,11 +65,13 @@ void	execute_last_cmd(char *cmd, char **envp, int fds[2][2], int *pids)
 		dup2(fds[0][1], STDOUT_FILENO);
 		close_fds(fds);
 		exec_cmd(cmd, envp);
+		exit(127);
 	}
 }
 
 void	execute_first_cmd(char *cmd, char **envp, int fds[2][2], int *pids)
 {
+	pids[0] = fork();
 	if (pids[0] < 0)
 	{
 		close_fds(fds);
@@ -81,8 +84,8 @@ void	execute_first_cmd(char *cmd, char **envp, int fds[2][2], int *pids)
 		dup2(fds[1][1], STDOUT_FILENO);
 		close_fds(fds);
 		exec_cmd(cmd, envp);
+		exit(127);
 	}
-	pids[1] = fork();
 }
 
 int	main(int ac, char **av, char **envp)
@@ -97,7 +100,6 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 	}
 	open_fds(av, fds);
-	pids[0] = fork();
 	execute_first_cmd(av[2], envp, fds, pids);
 	execute_last_cmd(av[3], envp, fds, pids);
 	close_fds(fds);

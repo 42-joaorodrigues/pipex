@@ -6,7 +6,7 @@
 /*   By: joao-alm <joao-alm@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 19:49:11 by joao-alm          #+#    #+#             */
-/*   Updated: 2025/10/19 00:50:13 by joao-alm         ###   ########.fr       */
+/*   Updated: 2025/10/20 01:31:44 by joao-alm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**get_argv(char *cmd)
 	argv = ft_split(cmd, ' ');
 	if (!argv)
 	{
-		write(2, "Error: memory allocation failed\n", 32);
+		write(2, "error: memory allocation failed\n", 32);
 		exit(127);
 	}
 	if (!argv[0])
@@ -59,7 +59,7 @@ static char	*get_full_path(char **paths, char **argv)
 		full_path = malloc(strlen(*paths) + 1 + strlen(argv[0]) + 1);
 		if (!full_path)
 		{
-			write(2, "Error: memory allocation failed\n", 32);
+			write(2, "error: memory allocation failed\n", 32);
 			free_split(argv);
 			free_split(paths);
 			exit(127);
@@ -82,14 +82,14 @@ char	**get_paths(char **argv, char **envp)
 	env_path = get_env_path(envp);
 	if (!env_path)
 	{
-		write(2, "Error: PATH not set\n", 20);
+		write(2, "error: PATH not set\n", 20);
 		free_split(argv);
 		exit(127);
 	}
 	paths = ft_split(env_path, ':');
 	if (!paths)
 	{
-		write(2, "Error: memory allocation failed\n", 32);
+		write(2, "error: memory allocation failed\n", 32);
 		free_split(argv);
 		exit(127);
 	}
@@ -118,5 +118,4 @@ void	exec_cmd(char *cmd, char **envp)
 		free(full_path);
 	free_split(argv);
 	free_split(paths);
-	exit(127);
 }
