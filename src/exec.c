@@ -56,7 +56,7 @@ static char	*get_full_path(char **paths, char **argv)
 
 	while (*paths)
 	{
-		full_path = malloc(strlen(*paths) + 1 + strlen(argv[0]) + 1);
+		full_path = malloc(ft_strlen(*paths) + 1 + ft_strlen(argv[0]) + 1);
 		if (!full_path)
 		{
 			write(2, "error: memory allocation failed\n", 32);
