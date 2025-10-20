@@ -11,14 +11,14 @@
 /* ************************************************************************** */
 
 #ifndef PIPEX_BONUS_H
-#define PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
-#include <stdbool.h>
-#include <sys/wait.h>
+# include <stdbool.h>
+# include <sys/wait.h>
 
-typedef int t_pipe[2];
+typedef int	t_pipe[2];
 
-typedef struct	s_pipex
+typedef struct s_pipex
 {
 	bool	heredoc;
 	int		fd_in;

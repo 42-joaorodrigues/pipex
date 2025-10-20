@@ -106,7 +106,7 @@ int	wait_and_clean(t_pipex *pp)
 int	main(int ac, char **av, char **envp)
 {
 	t_pipex	pipex;
-	
+
 	if (ac < 5)
 	{
 		write(2, "error: invalid arguments\n", 25);

@@ -102,7 +102,7 @@ int	handle_heredoc(char *delimiter)
 {
 	t_pipe	p;
 	char	*line;
-	
+
 	if (pipe(p) < 0)
 		return (-1);
 	while (1)
@@ -122,5 +122,5 @@ int	handle_heredoc(char *delimiter)
 	}
 	free(line);
 	close(p[1]);
-	return (p[0]);	
+	return (p[0]);
 }
